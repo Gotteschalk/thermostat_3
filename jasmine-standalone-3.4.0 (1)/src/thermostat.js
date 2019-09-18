@@ -2,15 +2,30 @@ const MINTEMP = 10;
 
 function Thermostat(temperature = 20) {
   this.temperature = temperature;
+  this.mode = "normal";
+  this.maxtemp = 32;
 };
 
 Thermostat.prototype.upTemp = function(tempRaise) {
+  this.modecheck
   this.temperature += tempRaise
+  if (this.temperature > this.maxtemp) {
+    this.temperature = this.maxtemp
+  };
 };
 
 Thermostat.prototype.downTemp = function(tempLower) {
   this.temperature -= tempLower
   if (this.temperature < MINTEMP) {
     this.temperature = MINTEMP
+  };
+};
+
+Thermostat.prototype.modecheck = function() {
+  if (this.mode == "normal") {
+    this.maxtemp = 32
+  }
+  else {
+    this.maxtemp = 25
   };
 };
