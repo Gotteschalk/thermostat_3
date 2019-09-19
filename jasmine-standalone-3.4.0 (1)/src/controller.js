@@ -4,32 +4,40 @@ $(document).ready(function () {
   $("#changeMode").click(function () {
     thermostat.changeEnergyMode()
     uiChangePowerMode()
+    uiChangeTemp()
     console.log(thermostat)
   })
   $("#increaseTemp").click(function () {
     thermostat.upTemp()
-    uiIncreaseTemp()
+    uiChangeTemp()
+
     console.log(thermostat)
   })
   $("#decreaseTemp").click(function () {
     thermostat.downTemp()
+    uiChangeTemp()
     console.log(thermostat)
   })
-  $("#reset").click(function() {
+  $("#reset").click(function () {
     thermostat.reset()
+    uiChangeTemp()
     console.log(thermostat)
   })
-
 });
 
 function uiChangePowerMode() {
-  if(thermostat.powerSave === true) {
+  if (thermostat.powerSave === true) {
     $("#powerMode").html("Powersave On")
   } else {
     $("#powerMode").html("Powersave Off")
   };
 };
 
-function uiIncreaseTemp() {
-    $("#temperature").html(thermostat.temperature)
+function uiChangeTemp() {
+  $("#temperature").html(thermostat.temperature)
+  $('#energyUsage').html(thermostat.checkEnergyUsage().text)
+  $('#energyUsage').css("color", `${thermostat.checkEnergyUsage().color}`)
+
 };
+
+
