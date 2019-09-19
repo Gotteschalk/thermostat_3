@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('Hello')
+
 const MINTEMP = 10;
 const MAX_TEMP_POWER_SAVE_ON = 25
 const MAX_TEMP_POWER_SAVE_OFF = 32
@@ -47,3 +49,4 @@ Thermostat.prototype.checkEnergyUsage = function () {
 Thermostat.prototype.changeEnergyMode = function () {
   this.powerSave = !this.powerSave
 };
+
