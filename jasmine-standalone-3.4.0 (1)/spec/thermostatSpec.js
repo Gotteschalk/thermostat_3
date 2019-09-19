@@ -8,38 +8,44 @@ describe("Thermostat", function () {
   });
 
   describe("upTemp", function () {
-    it("increases the temperature by a certain number of degrees", function () {
-      thermo.upTemp(5)
-      expect(thermo.temperature).toEqual(25);
+    it("increases the temperature by 1 degree", function () {
+      thermo.upTemp()
+      expect(thermo.temperature).toEqual(21);
     });
 
     it("only raises the temp to 25 degrees when powersave mode is on", function () {
-      thermo.upTemp(15);
+      for(i=0; i<6; i++) {
+        thermo.upTemp()
+      };
       expect(thermo.temperature).toEqual(25);
     })
 
     it("only raises the temp to 32 degrees when powersave mode is off", function () {
       thermo.powerSave = false;
-      thermo.upTemp(15);
+      for(i=0; i<15; i++) {
+        thermo.upTemp()
+      };
       expect(thermo.temperature).toEqual(32);
     })
   })
 
   describe("downTemp", function () {
-    it("decreases the temperature by a certain number of degrees", function () {
-      thermo.downTemp(8)
-      expect(thermo.temperature).toEqual(12)
+    it("decreases the temperature by 1 degree", function () {
+      thermo.downTemp()
+      expect(thermo.temperature).toEqual(19)
     });
 
     it("does not lower the temperature below the minimum, 10 degrees", function () {
-      thermo.downTemp(15)
+      for(i=0; i<11; i++) {
+        thermo.downTemp()
+      };
       expect(thermo.temperature).toEqual(10)
     })
   });
 
   describe("reset", function () {
     it("Expects to reset the temperature to 20 when actioned", function () {
-      thermo.downTemp(3)
+      thermo.downTemp()
       thermo.reset()
       expect(thermo.temperature).toEqual(20)
     })
@@ -47,7 +53,9 @@ describe("Thermostat", function () {
 
   describe("checkEnergyUsage", function () {
     it("Expects to return an object with text: low-usage and color: green when temperature is less than 18", function () {
-      thermo.downTemp(3)
+      for(i=0; i<3; i++) {
+        thermo.downTemp()
+      }
       expect(thermo.checkEnergyUsage()).toEqual({ text: 'low-usage', color: 'green' })
     })
 
@@ -56,8 +64,20 @@ describe("Thermostat", function () {
     })
 
     it("Expects to return an object with text: high-usage and color: green when temperature is more than 25", function () {
-      thermo.upTemp(6)
+      for(i=0; i<6; i++) {
+        thermo.upTemp()
+      };
       expect(thermo.checkEnergyUsage()).toEqual({ text: 'high-usage', color: 'red' })
     })
   });
+
+  describe('changeEnergyMode', function() {
+    it('switches powersavemode on and off', function() {
+      thermo.changeEnergyMode()
+      expect(thermo.powerSave).toEqual(false)
+      thermo.changeEnergyMode()
+      expect(thermo.powerSave).toEqual(true)
+    });
+  })
+
 });
