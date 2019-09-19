@@ -20,6 +20,14 @@ describe("Thermostat", function() {
       thermo.upTemp(15);
       expect(thermo.temperature).toEqual(25);
     })
+
+    it("only raises the temp to 32 degrees when powersave mode is off", function() {
+      thermo.mode = "normal";
+      console.log(thermo.mode)
+      console.log(thermo.maxtemp)
+      thermo.upTemp(15);
+      expect(thermo.temperature).toEqual(32);
+    })
   })
 
   describe("downTemp", function() {

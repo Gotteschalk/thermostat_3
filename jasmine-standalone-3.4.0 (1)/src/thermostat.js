@@ -2,12 +2,12 @@ const MINTEMP = 10;
 
 function Thermostat(temperature = 20) {
   this.temperature = temperature;
-  this.mode = "normal";
-  this.maxtemp = 32;
+  this.mode = "powersave";
+  this.maxtemp = 25;
 };
 
 Thermostat.prototype.upTemp = function(tempRaise) {
-  this.modecheck
+  this.modecheck()
   this.temperature += tempRaise
   if (this.temperature > this.maxtemp) {
     this.temperature = this.maxtemp
