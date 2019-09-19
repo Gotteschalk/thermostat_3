@@ -3,20 +3,33 @@ thermostat = new Thermostat()
 $(document).ready(function () {
   $("#changeMode").click(function () {
     thermostat.changeEnergyMode()
-    // uiChangePowerMode()
+    uiChangePowerMode()
     console.log(thermostat)
   })
-  $("#increaseTemp").click()
-  $("#decreaseTemp").click()
-  $("#reset").click()
+  $("#increaseTemp").click(function () {
+    thermostat.upTemp()
+    uiIncreaseTemp()
+    console.log(thermostat)
+  })
+  $("#decreaseTemp").click(function () {
+    thermostat.downTemp()
+    console.log(thermostat)
+  })
+  $("#reset").click(function() {
+    thermostat.reset()
+    console.log(thermostat)
+  })
 
 });
 
+function uiChangePowerMode() {
+  if(thermostat.powerSave === true) {
+    $("#powerMode").html("Powersave On")
+  } else {
+    $("#powerMode").html("Powersave Off")
+  };
+};
 
-
-
-function changeEnergyMode() {
-  thermostat.changeEnergyMode()
-}
-
-
+function uiIncreaseTemp() {
+    $("#temperature").html(thermostat.temperature)
+};

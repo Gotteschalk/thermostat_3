@@ -78,6 +78,15 @@ describe("Thermostat", function () {
       thermo.changeEnergyMode()
       expect(thermo.powerSave).toEqual(true)
     });
+
+    it('reduces the temperature to 25 if temperature is above 25 when pressed', function() {
+      thermo.changeEnergyMode()
+      for(i=0; i<10; i++) {
+        thermo.upTemp()
+      }
+      thermo.changeEnergyMode()
+      expect(thermo.temperature).toEqual(25)
+    })
   })
 
 });
